@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 配置spring和junit整合 junit启动时加载Spring IOC容器
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-// 告诉junit spring配置文件的闻之
-@ContextConfiguration(locations = {"classpath:/spring/spring-dao.xml"})
+// 告诉junit spring配置文件的位置 包含dao与service的测试
+@ContextConfiguration(locations = {"classpath:/spring/spring-dao.xml", "classpath:/spring/spring-service.xml"})
 public class BaseTest {
 }
