@@ -1,0 +1,1 @@
+# 弥补Entity不足 对Entity的封装
