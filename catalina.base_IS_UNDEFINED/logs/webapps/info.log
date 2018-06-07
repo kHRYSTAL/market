@@ -1,0 +1,6 @@
+?d{yyyy-MM-dd HH:mm:ss.SSS} [main] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==>  Preparing: SELECT area_id, area_name, priority, create_time, last_edit_time FROM tb_area ORDER BY priority DESC 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [main] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [main] DEBUG me.khrystal.market.dao.AreaDao.queryArea -<==      Total: 2
+?d{yyyy-MM-dd HH:mm:ss.SSS} [main] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==>  Preparing: SELECT area_id, area_name, priority, create_time, last_edit_time FROM tb_area ORDER BY priority DESC 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [main] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [main] DEBUG me.khrystal.market.dao.AreaDao.queryArea -<==      Total: 2
