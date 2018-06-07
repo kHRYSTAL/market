@@ -18,7 +18,7 @@ public class Shop {
     // -1 不可用 0 审核中 1 可用
     private Integer enableStatus;
     // 超级管理员给店家的提醒
-    private String advance;
+    private String advise;
     private Area area;
     private PersonInfo owner;
     private ShopCategory shopCategory;
@@ -63,8 +63,8 @@ public class Shop {
         return enableStatus;
     }
 
-    public String getAdvance() {
-        return advance;
+    public String getAdvise() {
+        return advise;
     }
 
     public Area getArea() {
@@ -119,8 +119,8 @@ public class Shop {
         this.enableStatus = enableStatus;
     }
 
-    public void setAdvance(String advance) {
-        this.advance = advance;
+    public void setAdvise(String advise) {
+        this.advise = advise;
     }
 
     public void setArea(Area area) {
