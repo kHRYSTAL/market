@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="me.khrystal.market.dao.ShopDao">
-    <!--useGeneratedKeys 使用JDBC数据库自增主键-->
+    <!--useGeneratedKeys 插入对象后 对象中自动获取到在数据库中的id, 如果为false 则返回0-->
     <insert id="insertShop" useGeneratedKeys="true" keyColumn="shop_id"
             keyProperty="shopId">
         INSERT INTO tb_shop(owner_id, area_id, shop_category_id, shop_name, shop_desc, shop_addr,
