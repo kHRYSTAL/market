@@ -22,7 +22,9 @@
     <!--3. 定义视图解析器-->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--html转发的目录-->
         <property name="prefix" value="/WEB-INF/html/"></property>
+        <!--忽略.html后缀-->
         <property name="suffix" value=".html"></property>
     </bean>
     <!--4.扫描web相关的bean-->
