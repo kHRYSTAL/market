@@ -3,7 +3,7 @@
  */
 // 立即执行函数 引入该js文件的html具有该文件中的函数
 $(function () {
-    var initUrl = '/market/getshopinitinfo';
+    var initUrl = '/market/shopadmin/getshopinitinfo';
     var registerShopUrl = '/market/shopadmin/registershop';
     //调试信息
     alert(initUrl);
@@ -13,6 +13,7 @@ $(function () {
         // 请求拉取json 也可以用$.ajax
         $.getJSON(initUrl, function (data) {
             if (data.success) {
+                console.log('====>', data);
                 var tempHtml = '';
                 var tempAreaHtml = '';
                 data.shopCategoryList.map(function (item, index) {
