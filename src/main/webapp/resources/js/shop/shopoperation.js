@@ -6,7 +6,6 @@ $(function () {
     var initUrl = '/market/shopadmin/getshopinitinfo';
     var registerShopUrl = '/market/shopadmin/registershop';
     //调试信息
-    alert(initUrl);
     // 初始化表单选择框
     getShopInitInfo();
     function getShopInitInfo() {
@@ -50,6 +49,12 @@ $(function () {
         var formData = new FormData();
         formData.append('shopImg', shopImg);
         formData.append('shopStr', JSON.stringify(shop));
+        var verifyCodeActual = $('#j_captcha').val();
+        if (!verifyCodeActual) {
+            $.toast('请输入验证码!');
+            return;
+        }
+        formData.append('verifyCodeActual', verifyCodeActual);
         console.log('发起请求');
         // 发起请求
         $.ajax({
@@ -65,6 +70,7 @@ $(function () {
                 } else {
                     $.toast("提交失败!" + data.errMsg);
                 }
+                $('#captcha_img').click();
             }
         });
     });

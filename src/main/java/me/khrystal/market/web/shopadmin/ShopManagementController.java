@@ -12,6 +12,7 @@ import me.khrystal.market.enums.ShopStateEnum;
 import me.khrystal.market.service.AreaService;
 import me.khrystal.market.service.ShopCategoryService;
 import me.khrystal.market.service.ShopService;
+import me.khrystal.market.util.CodeUtil;
 import me.khrystal.market.util.HttpServletRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,6 +67,11 @@ public class ShopManagementController {
     @ResponseBody
     private Map<String, Object> registerShop(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
+        if (!CodeUtil.checkVerifyCode(request)) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "输入了错误的验证码");
+            return modelMap;
+        }
         // 1. 接收并转化相应的参数, 包括店铺信息以及图片信息
         String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
         ObjectMapper mapper = new ObjectMapper();
