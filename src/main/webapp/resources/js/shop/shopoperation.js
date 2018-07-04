@@ -55,7 +55,7 @@ $(function () {
             return;
         }
         formData.append('verifyCodeActual', verifyCodeActual);
-        console.log('发起请求');
+        console.log('发起请求', formData);
         // 发起请求
         $.ajax({
             url: registerShopUrl,
