@@ -31,4 +31,9 @@
         </set>
         WHERE shop_id=#{shopId}
     </update>
+
+    <select id="queryShop" resultType="me.khrystal.market.entity.Shop">
+        SELECT *
+        FROM tb_shop
+    </select>
 </mapper>

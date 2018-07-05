@@ -44,6 +44,22 @@ public class ShopManagementController {
     @Autowired
     private AreaService areaService;
 
+    @RequestMapping(value = "/shoplist", method = {RequestMethod.GET})
+    @ResponseBody
+    public Map<String, Object> shopList() {
+        Map<String, Object> modelMap = new HashMap<>();
+        List<Shop> shopList= new ArrayList<>();
+        try {
+            shopList = shopService.getShopList();
+            modelMap.put("success", true);
+            modelMap.put("shops", shopList);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
+        return modelMap;
+    }
+
     @RequestMapping(value = "/getshopinitinfo", method = RequestMethod.GET)
     @ResponseBody
     private Map<String, Object> getShopInitInfo() {

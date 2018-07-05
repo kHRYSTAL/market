@@ -15,6 +15,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by kHRYSTAL on 18/7/2.
@@ -61,6 +62,11 @@ public class ShopServiceImpl implements ShopService {
             throw new ShopOperationException("addShop error:" + e.getMessage());
         }
         return new ShopExecution(ShopStateEnum.CHECK, shop);
+    }
+
+    @Override
+    public List<Shop> getShopList() {
+        return shopDao.queryShop();
     }
 
     private void addShopImg(Shop shop, CommonsMultipartFile shopImg) {

@@ -196,3 +196,28 @@
 ?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==>  Preparing: SELECT area_id, area_name, priority, create_time, last_edit_time FROM tb_area ORDER BY priority DESC 
 ?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==> Parameters: 
 ?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG me.khrystal.market.dao.AreaDao.queryArea -<==      Total: 2
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-7] DEBUG m.k.market.dao.ShopCategoryDao.queryShopCategory -==>  Preparing: SELECT shop_category_id, shop_category_name, shop_category_desc, shop_category_img, priority, create_time, last_edit_time, parent_id FROM tb_shop_category WHERE parent_id is not null ORDER BY priority DESC 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-7] DEBUG m.k.market.dao.ShopCategoryDao.queryShopCategory -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-7] DEBUG m.k.market.dao.ShopCategoryDao.queryShopCategory -<==      Total: 1
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-7] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==>  Preparing: SELECT area_id, area_name, priority, create_time, last_edit_time FROM tb_area ORDER BY priority DESC 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-7] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-7] DEBUG me.khrystal.market.dao.AreaDao.queryArea -<==      Total: 2
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] INFO  me.khrystal.market.web.superadmin.AreaController -===start===
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==>  Preparing: SELECT area_id, area_name, priority, create_time, last_edit_time FROM tb_area ORDER BY priority DESC 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] DEBUG me.khrystal.market.dao.AreaDao.queryArea -<==      Total: 2
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] ERROR me.khrystal.market.web.superadmin.AreaController -test error!
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] DEBUG me.khrystal.market.web.superadmin.AreaController -costTime:[4ms]
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] INFO  me.khrystal.market.web.superadmin.AreaController -===end===
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] DEBUG me.khrystal.market.dao.ShopDao.queryShop -==>  Preparing: SELECT * FROM tb_shop 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] DEBUG me.khrystal.market.dao.ShopDao.queryShop -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-10] DEBUG me.khrystal.market.dao.ShopDao.queryShop -<==      Total: 13
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG m.k.market.dao.ShopCategoryDao.queryShopCategory -==>  Preparing: SELECT shop_category_id, shop_category_name, shop_category_desc, shop_category_img, priority, create_time, last_edit_time, parent_id FROM tb_shop_category WHERE parent_id is not null ORDER BY priority DESC 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG m.k.market.dao.ShopCategoryDao.queryShopCategory -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG m.k.market.dao.ShopCategoryDao.queryShopCategory -<==      Total: 1
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==>  Preparing: SELECT area_id, area_name, priority, create_time, last_edit_time FROM tb_area ORDER BY priority DESC 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG me.khrystal.market.dao.AreaDao.queryArea -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-6] DEBUG me.khrystal.market.dao.AreaDao.queryArea -<==      Total: 2
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-9] DEBUG me.khrystal.market.dao.ShopDao.queryShop -==>  Preparing: SELECT * FROM tb_shop 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-9] DEBUG me.khrystal.market.dao.ShopDao.queryShop -==> Parameters: 
+?d{yyyy-MM-dd HH:mm:ss.SSS} [http-bio-8080-exec-9] DEBUG me.khrystal.market.dao.ShopDao.queryShop -<==      Total: 13

@@ -2,6 +2,8 @@ package me.khrystal.market.dao;
 
 import me.khrystal.market.entity.Shop;
 
+import java.util.List;
+
 /**
  * Created by kHRYSTAL on 18/6/7.
  */
@@ -21,4 +23,6 @@ public interface ShopDao {
      * @return
      */
     int updateShop(Shop shop);
+
+    List<Shop> queryShop();
 }
