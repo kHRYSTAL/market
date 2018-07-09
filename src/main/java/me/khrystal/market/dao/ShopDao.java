@@ -25,4 +25,6 @@ public interface ShopDao {
     int updateShop(Shop shop);
 
     List<Shop> queryShop();
+
+    Shop queryShopByShopId(long shopId);
 }

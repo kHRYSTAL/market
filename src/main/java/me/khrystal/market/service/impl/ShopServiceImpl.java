@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional // 该方法需要事务的支持
-    public ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg) {
+    public ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg) throws ShopOperationException {
         // 检查传入参数是否合法
         if (shop == null) {
             return new ShopExecution(ShopStateEnum.NULL_SHOP);
@@ -67,6 +68,39 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public List<Shop> getShopList() {
         return shopDao.queryShop();
+    }
+
+    @Override
+    public Shop getByShopId(long shopId) {
+        return shopDao.queryShopByShopId(shopId);
+    }
+
+    @Override
+    public ShopExecution modifyShop(Shop shop, CommonsMultipartFile shopImgInputStream) throws ShopOperationException {
+
+        if (shop == null || shop.getShopId() == null) {
+            return new ShopExecution(ShopStateEnum.NULL_SHOP);
+        } else {
+            //1. 判断是否需要处理图片
+            try {
+                Shop tempShop = shopDao.queryShopByShopId(shop.getShopId());
+                if (tempShop.getShopImg() != null) {
+                    ImageUtil.deleteFileOrPath(tempShop.getShopImg());
+                }
+                addShopImg(shop, shopImgInputStream);
+                //2. 更新店铺信息
+                shop.setLastEditTime(new Date());
+                int effectNum = shopDao.updateShop(shop);
+                if (effectNum <= 0) {
+                    return new ShopExecution(ShopStateEnum.INNER_ERROR);
+                } else {
+                    shop = shopDao.queryShopByShopId(shop.getShopId());
+                    return new ShopExecution(ShopStateEnum.SUCCESS);
+                }
+            } catch (Exception e) {
+                throw new ShopOperationException("modifyShopError:" + e.getMessage());
+            }
+        }
     }
 
     private void addShopImg(Shop shop, CommonsMultipartFile shopImg) {

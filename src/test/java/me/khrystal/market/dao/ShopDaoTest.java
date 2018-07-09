@@ -1,14 +1,23 @@
 package me.khrystal.market.dao;
 
 import me.khrystal.market.BaseTest;
+import me.khrystal.market.dto.ShopExecution;
 import me.khrystal.market.entity.Area;
 import me.khrystal.market.entity.PersonInfo;
 import me.khrystal.market.entity.Shop;
 import me.khrystal.market.entity.ShopCategory;
+import me.khrystal.market.exceptions.ShopOperationException;
+import me.khrystal.market.service.ShopService;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -19,6 +28,9 @@ import static org.junit.Assert.assertEquals;
 public class ShopDaoTest extends BaseTest {
     @Autowired
     private ShopDao shopDao;
+
+    @Autowired
+    private ShopService shopService;
 
     @Test
     public void testInsertShop() {
@@ -60,5 +72,25 @@ public class ShopDaoTest extends BaseTest {
         int effectedNum = shopDao.updateShop(shop);
         assertEquals(1, effectedNum);
 
+    }
+
+    @Test
+    public void testQueryByShopId() {
+        long shopId = 1L;
+        Shop shop = shopDao.queryShopByShopId(shopId);
+        System.out.println("areaId:" + shop.getArea().getAreaId());
+        System.out.println("areaName:" + shop.getArea().getAreaName());
+    }
+
+    @Ignore
+    public void testModifyShop() throws ShopOperationException, FileNotFoundException {
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+        shop.setShopName("修改后的店铺名称");
+        File shopImg = new File("/Users/khrystal/image/dabai.jpg");
+        InputStream is = new FileInputStream(shopImg);
+        ShopExecution shopExecution = null;
+//      shopExecution = shopService.modifyShop(shop, )
+        System.out.println("新的图片地址为:" + shopExecution.getShop().getShopImg());
     }
 }
