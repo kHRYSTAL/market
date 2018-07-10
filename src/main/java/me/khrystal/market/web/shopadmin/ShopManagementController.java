@@ -45,15 +45,69 @@ public class ShopManagementController {
     @Autowired
     private AreaService areaService;
 
-    @RequestMapping(value = "/shoplist", method = {RequestMethod.GET})
+//    @RequestMapping(value = "/shoplist", method = {RequestMethod.GET})
+//    @ResponseBody
+//    public Map<String, Object> shopList() {
+//        Map<String, Object> modelMap = new HashMap<>();
+//        List<Shop> shopList = new ArrayList<>();
+//        try {
+//            shopList = shopService.getShopList();
+//            modelMap.put("success", true);
+//            modelMap.put("shops", shopList);
+//        } catch (Exception e) {
+//            modelMap.put("success", false);
+//            modelMap.put("errMsg", e.getMessage());
+//        }
+//        return modelMap;
+//    }
+
+    /**
+     * 判断前端页面是否能够访问某个店铺的编辑页 管理session的操作
+     * 即 session或request中存在shopId
+     * 如果不存在 则重定向回店铺列表页
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/getshopmanagementinfo", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> shopList() {
+    private Map<String, Object> getShopManagementInfo(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
-        List<Shop> shopList = new ArrayList<>();
+        long shopId = HttpServletRequestUtil.getLong(request, "shopId");
+        if (shopId <= 0) {
+            Object currentShopObj = request.getSession().getAttribute("currentShop");
+            if (currentShopObj == null) {
+                modelMap.put("redirect", true);
+                modelMap.put("url", "/market/shop/shoplist");
+            } else {
+                Shop currentShop = (Shop) currentShopObj;
+                modelMap.put("redirect", false);
+                modelMap.put("shopId", currentShop.getShopId());
+            }
+        } else {
+            Shop currentShop = new Shop();
+            currentShop.setShopId(shopId);
+            request.getSession().setAttribute("currentShop", currentShop);
+            modelMap.put("redirect", false);
+        }
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/getshoplist", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> getShopList(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<>();
+        PersonInfo user = new PersonInfo();
+        // TODO: 18/7/10 设置user默认值 后期需要修改
+        user.setUserId(1L);
+        request.getSession().setAttribute("user", user);
+        user = (PersonInfo) request.getSession().getAttribute("user");
         try {
-            shopList = shopService.getShopList();
+            Shop shopCondition = new Shop();
+            shopCondition.setOwner(user);
+            ShopExecution se = shopService.getShopList(shopCondition, 0, 100);
             modelMap.put("success", true);
-            modelMap.put("shops", shopList);
+            modelMap.put("shopList", se.getShopList());
+            modelMap.put("user", user);
         } catch (Exception e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());

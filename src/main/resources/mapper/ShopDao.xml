@@ -21,7 +21,8 @@
             <result column="area_name" property="areaName"/>
         </association>
         <!--复合类型-->
-        <association property="shopCategory" column="shop_category_id" javaType="me.khrystal.market.entity.ShopCategory">
+        <association property="shopCategory" column="shop_category_id"
+                     javaType="me.khrystal.market.entity.ShopCategory">
             <id column="shop_category_id" property="shopCategoryId"/>
             <result column="shop_category_name" property="shopCategoryName"/>
         </association>
@@ -57,6 +58,84 @@
         s.shop_category_id = sc.shop_category_id
         AND
         s.shop_id = #{shopId}
+    </select>
+    <select id="queryShopList" resultMap="shopMap">
+        SELECT
+        s.shop_id,
+        s.shop_name,
+        s.shop_desc,
+        s.shop_addr,
+        s.phone,
+        s.shop_img,
+        s.priority,
+        s.create_time,
+        s.last_edit_time,
+        s.enable_status,
+        s.advise,
+        a.area_id,
+        a.area_name,
+        sc.shop_category_id,
+        sc.shop_category_name
+        FROM
+        tb_shop s,
+        tb_area a,
+        tb_shop_category sc
+        <where>
+            <if test="shopCondition.shopCategory != null and shopCondition.shopCategory.shopCategoryId != null">
+                and s.shop_category_id = #{shopCondition.shopCategory.shopCategoryId}
+            </if>
+            <if test="shopCondition.area != null and shopCondition.area.areaId != null">
+                and s.area_id = #{shopCondition.area.areaId}
+            </if>
+            <if test="shopCondition.shopName != null">
+                and s.shop_name like '%${shopCondition.shopName}%'
+            </if>
+            <if test="shopCondition.enableStatus != null">
+                and s.enable_status = #{shopCondition.enableStatus}
+            </if>
+            <if test="shopCondition.owner != null and shopCondition.owner.userId != null">
+                and s.owner_id = #{shopCondition.owner.userId}
+            </if>
+            <!-- 关联表 -->
+            and
+            s.area_id = a.area_id
+            and
+            s.shop_category_id = sc.shop_category_id
+        </where>
+        ORDER BY
+        s.priority DESC
+        LIMIT #{rowIndex}, #{pageSize};
+    </select>
+
+    <select id="queryShopCount" resultType="int">
+        SELECT
+        count(1)
+        FROM
+        tb_shop s,
+        tb_area a,
+        tb_shop_category sc
+        <where>
+            <if test="shopCondition.shopCategory != null and shopCondition.shopCategory.shopCategoryId != null">
+                and s.shop_category_id = #{shopCondition.shopCategory.shopCategoryId}
+            </if>
+            <if test="shopCondition.area != null and shopCondition.area.areaId != null">
+                and s.area_id = #{shopCondition.area.areaId}
+            </if>
+            <if test="shopCondition.shopName != null">
+                and s.shop_name like '%${shopCondition.shopName}%'
+            </if>
+            <if test="shopCondition.enableStatus != null">
+                and s.enable_status = #{shopCondition.enableStatus}
+            </if>
+            <if test="shopCondition.owner != null and shopCondition.owner.userId != null">
+                and s.owner_id = #{shopCondition.owner.userId}
+            </if>
+            <!-- 关联表 -->
+            and
+            s.area_id = a.area_id
+            and
+            s.shop_category_id = sc.shop_category_id
+        </where>
     </select>
     <!--useGeneratedKeys 插入对象后 对象中自动获取到在数据库中的id, 如果为false 则返回0-->
     <insert id="insertShop" useGeneratedKeys="true" keyColumn="shop_id"

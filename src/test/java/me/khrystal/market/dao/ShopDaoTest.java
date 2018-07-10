@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -82,6 +83,7 @@ public class ShopDaoTest extends BaseTest {
         System.out.println("areaName:" + shop.getArea().getAreaName());
     }
 
+    @Test
     @Ignore
     public void testModifyShop() throws ShopOperationException, FileNotFoundException {
         Shop shop = new Shop();
@@ -92,5 +94,37 @@ public class ShopDaoTest extends BaseTest {
         ShopExecution shopExecution = null;
 //      shopExecution = shopService.modifyShop(shop, )
         System.out.println("新的图片地址为:" + shopExecution.getShop().getShopImg());
+    }
+
+    @Test
+    public void testQueryShopList() {
+        Shop shopCondition = new Shop();
+        PersonInfo owner = new PersonInfo();
+        owner.setUserId(1L);
+        shopCondition.setOwner(owner);
+        List<Shop> shopList = shopDao.queryShopList(shopCondition, 1, 5);
+        System.out.println("店铺数量" + shopList.size());
+    }
+
+    @Test
+    public void testQueryShopCount() {
+        Shop shopCondition = new Shop();
+        PersonInfo owner = new PersonInfo();
+        owner.setUserId(1L);
+        shopCondition.setOwner(owner);
+        int count = shopDao.queryShopCount(shopCondition);
+        System.out.println("店铺列表大小:" + count);
+    }
+
+    @Test
+    public void testGetShopList() {
+        Shop shopCondition = new Shop();
+        ShopCategory sc = new ShopCategory();
+        sc.setShopCategoryId(1L);
+        shopCondition.setShopCategory(sc);
+        ShopExecution se = shopService.getShopList(shopCondition, 0, 2);
+        System.out.println("店铺列表数为:" +  se.getShopList().size());
+        System.out.println("店铺总数为:" + se.getCount());
+
     }
 }

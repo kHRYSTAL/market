@@ -7,6 +7,7 @@ import me.khrystal.market.enums.ShopStateEnum;
 import me.khrystal.market.exceptions.ShopOperationException;
 import me.khrystal.market.service.ShopService;
 import me.khrystal.market.util.ImageUtil;
+import me.khrystal.market.util.PageCalculator;
 import me.khrystal.market.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,10 +66,10 @@ public class ShopServiceImpl implements ShopService {
         return new ShopExecution(ShopStateEnum.CHECK, shop);
     }
 
-    @Override
-    public List<Shop> getShopList() {
-        return shopDao.queryShop();
-    }
+//    @Override
+//    public List<Shop> getShopList() {
+//        return shopDao.queryShop();
+//    }
 
     @Override
     public Shop getByShopId(long shopId) {
@@ -101,6 +102,21 @@ public class ShopServiceImpl implements ShopService {
                 throw new ShopOperationException("modifyShopError:" + e.getMessage());
             }
         }
+    }
+
+    @Override
+    public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
+        int rowIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
+        List<Shop> shopList = shopDao.queryShopList(shopCondition, rowIndex, pageSize);
+        int count = shopDao.queryShopCount(shopCondition);
+        ShopExecution se = new ShopExecution();
+        if (shopList != null) {
+            se.setShopList(shopList);
+            se.setCount(count);
+        } else {
+            se.setState(ShopStateEnum.INNER_ERROR.getState());
+        }
+        return se;
     }
 
     private void addShopImg(Shop shop, CommonsMultipartFile shopImg) {
