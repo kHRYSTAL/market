@@ -11,10 +11,20 @@ import java.util.Map;
  * Created by kHRYSTAL on 18/7/3.
  */
 @Controller
-
 public class ShopAdminController {
     @RequestMapping(value = "/shopoperation", method = {RequestMethod.GET})
     public String shopOperation() {
         return "market/shopoperation";
     }
+
+    @RequestMapping(value = "/shoplist", method = {RequestMethod.GET})
+    public String shoplist() {
+        return "market/shoplist";
+    }
+
+    @RequestMapping(value = "/shopmanagement", method = {RequestMethod.GET})
+    public String shopManagement() {
+        return "market/shopmanagement";
+    }
+
 }
