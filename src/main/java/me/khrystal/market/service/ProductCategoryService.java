@@ -1,6 +1,8 @@
 package me.khrystal.market.service;
 
+import me.khrystal.market.dto.ProductCategoryExecution;
 import me.khrystal.market.entity.ProductCategory;
+import me.khrystal.market.exceptions.ProductCategoryOperationException;
 
 import java.util.List;
 
@@ -15,4 +17,6 @@ public interface ProductCategoryService {
      * @return
      */
     List<ProductCategory> getProductCategoryList(long shopId);
+
+    ProductCategoryExecution batchAddProductCategory(List<ProductCategory> productCategoryList) throws ProductCategoryOperationException;
 }
