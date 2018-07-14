@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<div id="map_canvas" class="map" style="height: 600px;width: 100%;"></div>
+
+<script type="text/javascript">
+    function initMap() {
+        var isZoom = false;
+        var center = {
+            lat: 24.886,
+            lng: -70.268
+        };
+        // 第一个图形
+        var maps = new google.maps.Map(document.getElementById('map_canvas'), {
+            zoom: 5,
+            center: center,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        var triangleCoords = [{
+            lat: 25.774,
+            lng: -80.190
+        }, {
+            lat: 18.466,
+            lng: -66.118
+        }, {
+            lat: 32.321,
+            lng: -64.757
+        }];
+        for (var i = 0; i < triangleCoords.length; i++) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(triangleCoords[i].lat, triangleCoords[i].lng),//读取的经纬度
+                icon: 'http://wx2.sinaimg.cn/mw690/0060lm7Tly1ft872l66muj301c01cgld.jpg',//自定义Marker图片
+                map: maps
+            });
+            (function (marker) {
+                marker.addListener('click', function() {
+                    if (!isZoom) {
+                        isZoom = true;
+                        maps.setZoom(9);
+                        maps.setCenter(marker.getPosition());
+                    } else {
+                        isZoom = false;
+                        maps.setZoom(5);
+                        maps.setCenter(center);
+                    }
+                });
+            })(marker);
+
+        }
+
+
+        // // Define the LatLng coordinates for the polygon's path.
+        // var triangleCoords = [{
+        //     lat: 25.774,
+        //     lng: -80.190
+        // }, {
+        //     lat: 18.466,
+        //     lng: -66.118
+        // }, {
+        //     lat: 32.321,
+        //     lng: -64.757
+        // }];
+        //
+        // // Construct the polygon.
+        // var bermudaTriangle = new google.maps.Polygon({
+        //     paths: triangleCoords,
+        //     strokeColor: '#FF0000',
+        //     strokeOpacity: 0.8,
+        //     strokeWeight: 2,
+        //     fillColor: '#FF0000',
+        //     fillOpacity: 0.35
+        // });
+        // bermudaTriangle.setMap(map);
+
+        // 第二个图形
+
+        // var triangleCoords1 = [{
+        //     lat: 28.774,
+        //     lng: -60.190
+        // }, {
+        //     lat: 20.466,
+        //     lng: -77.118
+        // }, {
+        //     lat: 18.321,
+        //     lng: -20.757
+        // }];
+        //
+        // // Construct the polygon.
+        // var bermudaTriangle1 = new google.maps.Polygon({
+        //     paths: triangleCoords1,
+        //     strokeColor: '#0000FF',
+        //     strokeOpacity: 0.8,
+        //     strokeWeight: 2,
+        //     fillOpacity: 0
+        // });
+        // bermudaTriangle1.setMap(map);
+    }
+</script>
+<script type="text/javascript" src="http://maps.google.cn/maps/api/js?sensor=false&callback=initMap"></script>
+</body>
+</html>
