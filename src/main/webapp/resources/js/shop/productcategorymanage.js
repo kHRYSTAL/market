@@ -2,7 +2,7 @@ $(function () {
     var shopId = 1;
     var listUrl = '/market/shopadmin/getproductcategorylist?shopId=' + shopId;
     var addUrl = '/market/shopadmin/addproductcategory';
-    var deleteUrl = '/market/shop/removeproductcategory';
+    var deleteUrl = '/market/shopadmin/removeproductcategory';
 
     $.getJSON(
         listUrl,
