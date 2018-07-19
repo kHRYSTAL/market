@@ -25,6 +25,11 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     private ProductDao productDao;
 
     @Override
+    public List<ProductCategory> getByShopId(long shopId) {
+        return productCategoryDao.queryByShopId(shopId);
+    }
+
+    @Override
     public List<ProductCategory> getProductCategoryList(long shopId) {
         return productCategoryDao.queryProductCategoryList(shopId);
     }
@@ -49,6 +54,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     @Transactional
+    // 由于商品类别下可能存在商品 需要先将商品所属的商品类别置空 再删除商品类别
     public ProductCategoryExecution deleteProductCategory(
             long productCategoryId, long shopId) throws RuntimeException {
         try {

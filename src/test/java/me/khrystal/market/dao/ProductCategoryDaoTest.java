@@ -3,7 +3,9 @@ package me.khrystal.market.dao;
 import me.khrystal.market.BaseTest;
 import me.khrystal.market.entity.ProductCategory;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.List;
 /**
  * Created by kHRYSTAL on 18/7/11.
  */
+// 按照方法名字母顺序 顺序执行
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductCategoryDaoTest extends BaseTest {
 
     @Autowired

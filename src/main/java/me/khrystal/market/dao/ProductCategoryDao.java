@@ -9,6 +9,13 @@ import java.util.List;
  * Created by kHRYSTAL on 18/7/11.
  */
 public interface ProductCategoryDao {
+
+    /**
+     * 通过employee id 查询店铺
+     * @return List<ProductCategory>
+     */
+    List<ProductCategory> queryByShopId(long shopId);
+
     /**
      * 通过shop id 查询店铺下所有商品类别
      *
